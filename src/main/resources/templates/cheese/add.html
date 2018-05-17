@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" /> <!-- must add self-closing tag with thymeleaf -->
+    <title th:text="${title}">Title</title>
 </head>
 <body>
+<h1 th:text="${title}">Default Title</h1>
+
+<form method = "post"><!--leaving off action attribute will by default submit form to same location-->
+    <input type="text" name="cheeseName" />
+    <input type="submit" value="Add Cheese" />
+</form>
 
 </body>
 </html>

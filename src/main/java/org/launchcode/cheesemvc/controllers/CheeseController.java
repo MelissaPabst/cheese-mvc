@@ -4,7 +4,10 @@ package org.launchcode.cheesemvc.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -21,6 +24,8 @@ to bottom of build.gradle to allow templates to refresh without stopping server 
 @RequestMapping("cheese")
 public class CheeseController {
 
+    //ArrayList was moved from below to make list accessible to below methods
+    static ArrayList<String> cheeses = new ArrayList<>();
 
     //request path /cheese
     @RequestMapping(value = "")
@@ -35,7 +40,7 @@ public class CheeseController {
 
 
         //create arraylist to pass in list of cheeses to the view
-        ArrayList<String> cheeses = new ArrayList<>();
+        //ArrayList<String> cheeses = new ArrayList<>();
         //hardcoded cheeses, but we want user to be able to enter cheeses
         //cheeses.add("cheddar");
         //cheeses.add("parmesan");
@@ -51,9 +56,31 @@ public class CheeseController {
 
 
     //controller method to display form to add cheese template
-    @RequestMapping(value = "add")
+    //display of form will be GET request
+    @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
+        model.addAttribute("title", "Add Cheese");
         return "cheese/add";
+    }
+
+    //handler to process form
+    //processing of form will be POST request
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    //get data out of form via HttpServletRequest
+    //public String processAddCheeseForm(HttpServletRequest request) {
+        //"cheeseName" matches data attribute name in input in template
+        //String cheeseName = request.getParameter("cheeseName");
+    //}
+    //ORRRRR get data out of form via @RequestParam (More "Spring-like")
+    //controller-handler expects to be passed a string named cheeseName
+    //method param needs to match value in form
+    public String processAddCheeseForm(@RequestParam String cheeseName) {
+        //take cheese name and add to list of cheeses
+        cheeses.add(cheeseName);
+        //redirect to /cheese, redirect is left blank to redirect to "cheese" controller
+        return "redirect:";
+
+
     }
 
 }
