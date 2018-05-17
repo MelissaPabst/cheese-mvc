@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /*add bootRun {
         sourceResources sourceSets.main
         }
@@ -30,8 +33,27 @@ public class CheeseController {
         //modify "index" to be "/cheese/index" after making a cheese directory in templates
         //added th:text attribute to template
 
+
+        //create arraylist to pass in list of cheeses to the view
+        ArrayList<String> cheeses = new ArrayList<>();
+        //hardcoded cheeses, but we want user to be able to enter cheeses
+        //cheeses.add("cheddar");
+        //cheeses.add("parmesan");
+        //cheeses.add("brie");
+
+        //now we want to pass this into the view
+        //now we're passing an object
+        model.addAttribute("cheeses", cheeses);
+        //now we're passing a string
         model.addAttribute("title", "My List of Cheeses");
         return "cheese/index";
+    }
+
+
+    //controller method to display form to add cheese template
+    @RequestMapping(value = "add")
+    public String displayAddCheeseForm(Model model) {
+        return "cheese/add";
     }
 
 }

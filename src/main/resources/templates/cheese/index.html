@@ -2,10 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" /> <!-- must add self-closing tag with thymeleaf -->
-    <title th:text="${title}"></title>
+    <title th:text="${title}">Title</title>
 </head>
 <body>
-    <h1 th:text="${title}"></h1>
+    <h1 th:text="${title}">Default Title</h1>
+
+<p th:unless="${cheeses} and ${cheeses.size()}">No cheese :(</p> <!-- conditional, if cheeses exist and it's size is not zero-->
+
+<ul> <!-- Want to be able to loop over a list of cheeses, add th:each attribute-->
+    <li th:each="cheese : ${cheeses}" th:text="${cheese}"></li> <!--repeats li tag for each cheese in cheeses, will insert text of iterator variable-->
+
+</ul>
 
 </body>
 </html>
