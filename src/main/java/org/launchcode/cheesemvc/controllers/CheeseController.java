@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*add bootRun {
         sourceResources sourceSets.main
@@ -27,8 +28,8 @@ public class CheeseController {
     //ArrayList was moved from below to make list accessible to below methods
     //data will only exist while application is running
     //not a sub for a database
-    static ArrayList<String> cheeses = new ArrayList<>();
-
+    //static ArrayList<String> cheeses = new ArrayList<>();
+    static HashMap<String, String> cheeses = new HashMap<>();
     //request path /cheese
     @RequestMapping(value = "")
     //@ResponseBody removed to pass control to a view
@@ -76,9 +77,11 @@ public class CheeseController {
     //ORRRRR get data out of form via @RequestParam (More "Spring-like")
     //controller-handler expects to be passed a string named cheeseName
     //method param needs to match value in form
-    public String processAddCheeseForm(@RequestParam String cheeseName) {
+    //add @requestparam cheeseDiscription for use of hashmap
+    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
         //take cheese name and add to list of cheeses
-        cheeses.add(cheeseName);
+        //cheeses.add(cheeseName);
+        cheeses.put(cheeseName, cheeseDescription);
         //redirect to /cheese, redirect is left blank to redirect to "cheese" controller
         return "redirect:";
 

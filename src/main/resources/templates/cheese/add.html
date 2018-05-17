@@ -8,8 +8,11 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method = "post"><!--leaving off action attribute will by default submit form to same location-->
-    <input type="text" name="cheeseName" />
+    Name: <input type="text" name="cheeseName" />
+    <!--add description box-->
+    Description: <input type="text" name="cheeseDescription" />
     <input type="submit" value="Add Cheese" />
+
 </form>
 
 </body>
