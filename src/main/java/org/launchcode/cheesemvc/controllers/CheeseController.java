@@ -25,6 +25,8 @@ to bottom of build.gradle to allow templates to refresh without stopping server 
 public class CheeseController {
 
     //ArrayList was moved from below to make list accessible to below methods
+    //data will only exist while application is running
+    //not a sub for a database
     static ArrayList<String> cheeses = new ArrayList<>();
 
     //request path /cheese
