@@ -85,7 +85,24 @@ public class CheeseController {
         //redirect to /cheese, redirect is left blank to redirect to "cheese" controller
         return "redirect:";
 
-
     }
 
+    //to display remove cheese form
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveCheeseForm(Model model) {
+        model.addAttribute("title", "Remove Cheese");
+        model.addAttribute("cheeses", cheeses);
+        return "cheese/remove";
+    }
+
+    //to process remove cheese form
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveCheeseForm(@RequestParam ArrayList<String> cheese) {
+
+        for(String c : cheese) {
+            cheeses.remove(c);
+        }
+
+        return "redirect:";
+    }
 }
