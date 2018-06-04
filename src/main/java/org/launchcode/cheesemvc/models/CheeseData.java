@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 //mimics behavior of db until we can learn db
+//all are static, no constructor needed
 public class CheeseData {
 
     static ArrayList<Cheese> cheeses = new ArrayList<>();
