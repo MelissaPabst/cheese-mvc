@@ -1,6 +1,7 @@
 package org.launchcode.cheesemvc.controllers;
 
 import org.launchcode.cheesemvc.models.Cheese;
+import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +59,7 @@ public class CheeseController {
 
         //now we want to pass this into the view
         //now we're passing an object
-        model.addAttribute("cheeses", cheeses);
+        model.addAttribute("cheeses", CheeseData.getAll());
         //now we're passing a string
         model.addAttribute("title", "My List of Cheeses");
         return "cheese/index";
@@ -89,7 +90,7 @@ public class CheeseController {
         //take cheese name and add to list of cheeses
         //cheeses.add(cheeseName);
         Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
-        cheeses.add(newCheese);
+        CheeseData.add(newCheese);
         //put statement removed; no longer using hashmap.
         //cheeses.put(cheeseName, cheeseDescription);
         //redirect to /cheese, redirect is left blank to redirect to "cheese" controller
@@ -101,19 +102,23 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("title", "Remove Cheese");
-        model.addAttribute("cheeses", cheeses);
+        model.addAttribute("cheeses", CheeseData.getAll());
         //model.addAttribute("cheeses", cheeses.keySet());
         return "cheese/remove";
     }
 
     //to process remove cheese form
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam ArrayList<String> cheese) {
+    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
-        //no longer works because we are now using an arraylist
+        //no longer works removing by name because we are now using an arraylist
         //for(String c : cheese) {
             //cheeses.remove(c);
         //}
+
+        for (int cheeseId : cheeseIds) {
+            CheeseData.remove(cheeseId);
+        }
 
         return "redirect:";
     }
