@@ -29,6 +29,8 @@ public class CheeseController {
     //data will only exist while application is running
     //not a sub for a database
     //static ArrayList<String> cheeses = new ArrayList<>();
+    //storing cheese in hashmap allows cheeses to be overwritten if there are two cheeses of same name
+    //use POJO (java class) to store data instead
     static HashMap<String, String> cheeses = new HashMap<>();
     //request path /cheese
     @RequestMapping(value = "")
