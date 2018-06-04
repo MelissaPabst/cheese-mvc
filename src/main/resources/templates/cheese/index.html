@@ -27,8 +27,9 @@
         </tr>
 
         <tr th:each="cheese : ${cheeses}">
-            <td th:text="${cheese.key}"></td>
-            <td th:text="${cheese.value}"></td>
+            <!--thymeleaf calls getter for name and description fields-->
+            <td th:text="${cheese.name}"></td>
+            <td th:text="${cheese.description}"></td>
         </tr>
 
     </table>

@@ -9,7 +9,7 @@ public class Cheese {
         //name =aName;
         //description =aDescription;
     //}
-    
+
     public Cheese(String name, String description) {
         this.name = name;
         this.description = description;

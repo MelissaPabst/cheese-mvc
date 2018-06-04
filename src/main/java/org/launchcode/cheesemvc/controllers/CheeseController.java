@@ -1,6 +1,6 @@
 package org.launchcode.cheesemvc.controllers;
 
-//import org.launchcode.models.Cheese;
+import org.launchcode.cheesemvc.models.Cheese;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,11 @@ public class CheeseController {
     //static ArrayList<String> cheeses = new ArrayList<>();
     //storing cheese in hashmap allows cheeses to be overwritten if there are two cheeses of same name
     //use POJO (java class) to store data instead
-    static HashMap<String, String> cheeses = new HashMap<>();
+    //static HashMap<String, String> cheeses = new HashMap<>();
+
+    //refactor to use ArrayList and Cheese class added to model
+    static ArrayList<Cheese> cheeses = new ArrayList<>();
+
     //request path /cheese
     @RequestMapping(value = "")
     //@ResponseBody removed to pass control to a view
@@ -83,7 +87,10 @@ public class CheeseController {
     public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
         //take cheese name and add to list of cheeses
         //cheeses.add(cheeseName);
-        cheeses.put(cheeseName, cheeseDescription);
+        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
+        cheeses.add(newCheese);
+        //put statement removed; no longer using hashmap.
+        //cheeses.put(cheeseName, cheeseDescription);
         //redirect to /cheese, redirect is left blank to redirect to "cheese" controller
         return "redirect:";
 
@@ -93,7 +100,8 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveCheeseForm(Model model) {
         model.addAttribute("title", "Remove Cheese");
-        model.addAttribute("cheeses", cheeses.keySet());
+        model.addAttribute("cheeses", cheeses);
+        //model.addAttribute("cheeses", cheeses.keySet());
         return "cheese/remove";
     }
 
