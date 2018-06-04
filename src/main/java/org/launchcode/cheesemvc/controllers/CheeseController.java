@@ -4,6 +4,7 @@ import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,10 +87,11 @@ public class CheeseController {
     //controller-handler expects to be passed a string named cheeseName
     //method param needs to match value in form
     //add @requestparam cheeseDiscription for use of hashmap
-    public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDescription) {
+    public String processAddCheeseForm(@ModelAttribute Cheese newCheese) {
         //take cheese name and add to list of cheeses
         //cheeses.add(cheeseName);
-        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
+        //removed for model binding
+        //Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
         CheeseData.add(newCheese);
         //put statement removed; no longer using hashmap.
         //cheeses.put(cheeseName, cheeseDescription);
