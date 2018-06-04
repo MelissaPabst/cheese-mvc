@@ -34,7 +34,8 @@ public class CheeseController {
     //static HashMap<String, String> cheeses = new HashMap<>();
 
     //refactor to use ArrayList and Cheese class added to model
-    static ArrayList<Cheese> cheeses = new ArrayList<>();
+    //violates MVC model to have arraylist in controller
+    //static ArrayList<Cheese> cheeses = new ArrayList<>();
 
     //request path /cheese
     @RequestMapping(value = "")
@@ -109,9 +110,10 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam ArrayList<String> cheese) {
 
-        for(String c : cheese) {
-            cheeses.remove(c);
-        }
+        //no longer works because we are now using an arraylist
+        //for(String c : cheese) {
+            //cheeses.remove(c);
+        //}
 
         return "redirect:";
     }
