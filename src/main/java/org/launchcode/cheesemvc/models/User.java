@@ -1,16 +1,28 @@
 package org.launchcode.cheesemvc.models;
 
+import java.util.Date;
+
 public class User {
 
     private String username;
     private String email;
     private String password;
+    private int userId;
+    private static int nextId = 1;
+    private final Date createDate;
+
+    public User() {
+        userId = nextId;
+        createDate = new Date();
+        nextId++;
+    }
 
 
     public User (String username, String email, String password) {
-        //call default constructor for given class
+        //call default constructor for given class with this()
         //must be called on first line to initialize id field
-        //this();
+        // "this" signifies field of class, not method input
+        this();
         this.username = username;
         this.email = email;
         this.password = password;
@@ -18,8 +30,8 @@ public class User {
 
 
     //default constructor
-    public User() {
-    }
+    //public User() {
+    //}
 
 
 
@@ -45,5 +57,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getUserId() { return userId; }
+
+    private void setUserId(int userId) { this.userId = userId; }
+
+    public Date getCreateDate() {
+        return createDate;
     }
 }
