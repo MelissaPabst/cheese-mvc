@@ -13,6 +13,12 @@ public class Cheese {
     //@NotNull actually passes an empty string--Define @size and add message.
     @Size(min=1, message="Description must not be empthy")
     private String description;
+
+    //enum class. create enum type and add to another class
+    //private CheeseType type = CheeseType.HARD;
+    //set type of cheeses through view and controller instead of CheeseType.HARD
+    private CheeseType type;
+
     //unique number to identify each object created from cheese class as different
     private int cheeseId;
     private static int nextId = 1;
@@ -60,5 +66,13 @@ public class Cheese {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public CheeseType getType() {
+        return type;
+    }
+
+    public void setType(CheeseType type) {
+        this.type = type;
     }
 }

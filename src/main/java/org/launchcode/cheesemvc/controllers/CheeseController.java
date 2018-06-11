@@ -2,6 +2,7 @@ package org.launchcode.cheesemvc.controllers;
 
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
+import org.launchcode.cheesemvc.models.CheeseType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -74,6 +75,8 @@ public class CheeseController {
         model.addAttribute("title", "Add Cheese");
         //build skeleton cheese to use its properties to render the form properly
         model.addAttribute(new Cheese());
+        //pass in new object to hold cheese types, will return an array of cheesetypes, can use array in view
+        model.addAttribute("cheeseTypes", CheeseType.values());
         return "cheese/add";
     }
 
