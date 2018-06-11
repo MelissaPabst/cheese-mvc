@@ -4,9 +4,11 @@ import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +70,10 @@ public class CheeseController {
     //display of form will be GET request
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
+
         model.addAttribute("title", "Add Cheese");
+        //build skeleton cheese to use its properties to render the form properly
+        model.addAttribute(new Cheese());
         return "cheese/add";
     }
 
@@ -84,7 +89,16 @@ public class CheeseController {
     //controller-handler expects to be passed a string named cheeseName
     //method param needs to match value in form
     //add @requestparam cheeseDiscription for use of hashmap
-    public String processAddCheeseForm(@ModelAttribute Cheese newCheese) {
+    //@Valid validates based on @NotNull etc.
+    //User errors to check if model was validated properly
+    public String processAddCheeseForm(@ModelAttribute @Valid Cheese newCheese, Errors errors, Model model) {
+
+        //boolean; if errors in errors object
+        if(errors.hasErrors()) {
+            //render add form again if errors, errors displayed in form
+            model.addAttribute("title", "Add Cheese");
+            return "cheese/add";
+        }
         //take cheese name and add to list of cheeses
         //cheeses.add(cheeseName);
         //removed for model binding

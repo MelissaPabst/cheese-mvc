@@ -46,25 +46,6 @@ public class UserController {
         model.addAttribute("error", "Passwords do not match");
         return "user/add";
 
-
-        /*if (user.getEmail() != null && user.getEmail().contains("@")) {
-            model.addAttribute("email", user.getEmail());
-            return "user/add";
-        }
-
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("error", "Not a valid email");
-        return "user/add";
-
-        int usernameLength = user.getUsername().length();
-
-        if (user.getUsername() != null && usernameLength > 5 && usernameLength < 16 ){
-            return "user/add";
-        }
-
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("error", "Not a valid Username");
-        return "user/add";*/
     }
 
     @RequestMapping(value = "{userId}")

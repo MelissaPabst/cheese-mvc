@@ -1,8 +1,17 @@
 package org.launchcode.cheesemvc.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Cheese {
 
+    @NotNull
+    @Size(min=3, max=15)
     private String name;
+
+    @NotNull
+    //@NotNull actually passes an empty string--Define @size and add message.
+    @Size(min=1, message="Description must not be empthy")
     private String description;
     //unique number to identify each object created from cheese class as different
     private int cheeseId;
