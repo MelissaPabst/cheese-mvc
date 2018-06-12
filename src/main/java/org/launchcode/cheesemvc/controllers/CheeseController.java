@@ -100,6 +100,7 @@ public class CheeseController {
         if(errors.hasErrors()) {
             //render add form again if errors, errors displayed in form
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("cheeseTypes", CheeseType.values());
             return "cheese/add";
         }
         //take cheese name and add to list of cheeses
@@ -145,18 +146,31 @@ public class CheeseController {
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
         //ask CheeseData for the object with the given cheeseId and put it in the model
         //store cheese in temporary local variable
-        Cheese c = CheeseData.getById((cheeseId));
-        model.addAttribute("cheese", c);
+        Cheese theCheese = CheeseData.getById((cheeseId));
+        model.addAttribute("cheese", theCheese);
+        model.addAttribute("cheeseTypes", CheeseType.values());
+        model.addAttribute("title", "Edit Cheese " + theCheese.getName() + " (id=" + theCheese.getCheeseId() + ")");
         return "cheese/edit";
 
     }
 
     //method to process edit form
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditForm(int cheeseId, String name, String description) {
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable int cheeseId, @ModelAttribute @Valid Cheese aCheese, Errors errors, Model model) {
+
+        if(errors.hasErrors()) {
+            //render edit form again if errors, errors displayed in form
+            Cheese theCheese = CheeseData.getById(cheeseId);
+            model.addAttribute("cheeseTypes", CheeseType.values());
+            model.addAttribute("title", " Edit cheese" + theCheese.getName() + " (id=" + theCheese.getCheeseId() + ")");
+            return "cheese/edit";
+        }
+
         Cheese c = CheeseData.getById(cheeseId);
-        c.setName(name);
-        c.setDescription(description);
-        return "redirect:";
+        c.setName(aCheese.getName());
+        c.setDescription(aCheese.getDescription());
+        c.setType(aCheese.getType());
+        c.setRating(aCheese.getRating());
+        return "redirect:/cheese";
     }
 }

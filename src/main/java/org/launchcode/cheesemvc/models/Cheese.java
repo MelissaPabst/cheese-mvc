@@ -1,5 +1,7 @@
 package org.launchcode.cheesemvc.models;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,6 +21,10 @@ public class Cheese {
     //set type of cheeses through view and controller instead of CheeseType.HARD
     private CheeseType type;
 
+    @Min(1)
+    @Max(5)
+    private int rating;
+
     //unique number to identify each object created from cheese class as different
     private int cheeseId;
     private static int nextId = 1;
@@ -34,6 +40,8 @@ public class Cheese {
         this();
         this.name = name;
         this.description = description;
+        this.type = type;
+        this.rating = rating;
     }
 
 
@@ -74,5 +82,13 @@ public class Cheese {
 
     public void setType(CheeseType type) {
         this.type = type;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }

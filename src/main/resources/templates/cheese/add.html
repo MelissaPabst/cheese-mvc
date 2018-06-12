@@ -13,11 +13,11 @@
         <input class="form-control" th:field="*{name}"/><!--"*" means use the form's th:object-->
         <span th:errors="*{name}" class="error"></span>
     </div>
+
     <div class="form-group">
         <label th:for="description">Description</label>
         <input class="form-control" th:field="*{description}"/>
         <span th:errors="*{description}" class="error"></span>
-    </div>
     </div>
 
     <div class="form-group">
@@ -34,6 +34,11 @@
                     th:value="${cheeseType}"
             </option>
         </select>
+    </div>
+    <div class="form-group">
+        <label th:for="rating">Rating</label>
+        <input class="form-control" type="number" th:field="*{rating}" />
+        <span th:errors="*{rating}" class="error"></span>
     </div>
 
     <!--Name: <input type="text" name="cheeseName" />-->
