@@ -14,11 +14,15 @@
 
     <h1 th:text="${title}"></h1>
 
+    <p th:unless="${users} and ${users.size()}">Zero users. No one is signed up</p>
 
-    <ul>
-        <li th:each="user : ${users}">
+
+    <ul th:each="user : ${users}">
+        <form method="POST">
+        <li>
             <a th:href="@{'/user/' + ${user.userId}}" th:text="${user.username}"></a>
         </li>
+        </form>
     </ul>
 
 

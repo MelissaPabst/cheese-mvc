@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8"/>
     <title></title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
-<body>
+<body class="container">
 
 <h1>Register for Cheese List</h1>
 
-<form method="post">
+<form method="post" style="max-width:600px;" th:object="${user}">
     <div class="form-group">
-        <label for="username">Username</label>
-        <input th:value="${username}" id="username" name="username" type="text" required="required" />
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input th:value="${email}" id="email" name="email" type="text" required="required" />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" required="required" />
-    </div>
-    <div class="form-group">
-        <label for="verify">Verify Password</label>
-        <input id="verify" name="verify" type="password" required="required" />
+        <label th:for="username">Username</label>
+        <input class="form-control" th:field="*{username}" /><!--"*" meansUse username attribute of user object at scope of form-->
+        <span th:errors="*{username}" class="error"></span>
     </div>
 
-    <div th:text="${error}"></div>
+    <div class="form-group">
+        <label th:for="email">Email</label>
+        <input class="form-control" th:field="*{email}" type="email" required="required" />
+        <span th:errors="*{email}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="password">Password</label>
+        <input class="form-control" type="password" th:field="*{password}" required="required" />
+        <span th:errors="*{password}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="verifyPassword">Verify Password</label>
+        <input class="form-control" type="password" th:field="*{verifyPassword}" required="required" />
+        <span th:errors="*{verifyPassword}" class="error"></span>
+
+    </div>
+
+    <!--div class="error" th:text="${error}"></div-->
 
     <input type="submit" value="Register" />
 </form>
